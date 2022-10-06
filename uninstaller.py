@@ -67,7 +67,7 @@ try_remove_dir('mods')
 try_remove_dir('extensions')
 try_remove_dir('.GDHM/dll')
 
-temp_file = open('gdl_unins000.txt', 'rb')
+temp_file = open('./gdl_unins000.txt', 'rb')
 backup = json.loads(temp_file.read().decode())
 temp_file.close()
 

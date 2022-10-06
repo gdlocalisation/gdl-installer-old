@@ -116,6 +116,9 @@ def install_gdl(install_type):
     log(f'Скачиваем файл локализации...')
     progress(3)
     fast_write(os.path.join(base_folder, 'ru_ru.json'), get(get_url('gdl_res/ru_ru.json')).content)
+    log(f'Скачиваем файл с адресами...')
+    progress(4)
+    fast_write(os.path.join(base_folder, 'gdl_patches.json'), get(get_url('gdl_res/gdl_patches.json')).content)
     progress(5)
     if install_type == 'default':
         '''log('Делаем бэкап файла расширений...')
@@ -172,11 +175,11 @@ def install_gdl(install_type):
         backup[file_path] = file_path + '.backup'
         fast_write(file_path, file_content)
         progress(20 + int(one_progress * i))
-    log('Регистрируем как приложение...')
+    # log('Регистрируем как приложение...')
     icon_path = os.path.join(base_folder, 'Resources', 'gdl_icon.ico').replace("/", "\\")
     shutil.copy('files/gdl_icon.ico', icon_path)
 
-    reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+    """reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     try:
         winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, REG_PATH)
     except WindowsError:
@@ -189,7 +192,7 @@ def install_gdl(install_type):
     winreg.SetValueEx(key, 'UninstallString', 0, winreg.REG_SZ, f'"{uninstall_path}"')
     winreg.SetValueEx(key, 'Publisher', 0, winreg.REG_SZ, 'The GDL Community')
     winreg.SetValueEx(key, 'NoModify', 0, winreg.REG_DWORD, 1)
-    winreg.SetValueEx(key, 'NoRepair', 0, winreg.REG_DWORD, 1)
+    winreg.SetValueEx(key, 'NoRepair', 0, winreg.REG_DWORD, 1)"""
 
     log('Сохраняем файлы бэкапа в файл...')
     fast_write(os.path.join(base_folder, 'gdl_unins000.txt'), json.dumps(backup))
